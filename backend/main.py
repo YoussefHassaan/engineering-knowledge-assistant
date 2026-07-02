@@ -2,15 +2,15 @@ from fastapi import FastAPI , HTTPException
 from pydantic import BaseModel
 import psycopg2
 import datetime
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
-conn = psycopg2.connect(
-    dbname="fastapi",
-    user="postgres",
-    password="2407",
-    host="localhost"
-)
+conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+
 cur = conn.cursor()
 
 employees = []
